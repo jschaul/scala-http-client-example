@@ -9,16 +9,14 @@ import play.api.libs.ws.{WSRequest, WSResponse}
 import scala.concurrent.Future
 import scala.util.Try
 
-// for syntax of wsClient, see https://www.playframework.com/documentation/2.5.x/ScalaWS
-// for json docs, see https://www.playframework.com/documentation/2.5.x/ScalaJson
-
 object Hello extends LazyLogging {
 
+  // There should only be one actor system created for a given application.
+  // Terminate it if you want to stop the process - it is long-lived.
   implicit val actorSystem = akka.actor.ActorSystem()
 
-  implicit val materializer: Materializer = ActorMaterializer()(actorSystem)
-
-  implicit val wsClient = AhcWSClient()(materializer)
+  // this sets up the actual wsclient we will be using. Make sure to close it when you're done.
+  implicit val wsClient = AhcWSClient()(ActorMaterializer()(actorSystem))
 
   import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -38,6 +36,9 @@ object Hello extends LazyLogging {
     val responseFuture: Future[WSResponse] = request.get()
 
     responseFuture.map { response =>
+      // the inner part of "map" happens when
+      // 1) the future completes
+      // 2) it is successful (i.e. doesn't throw an exception)
       logger.info(s"response: ${Json.prettyPrint(response.json)}")
       cleanUp()
     }

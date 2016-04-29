@@ -17,3 +17,12 @@ Once in the sbt shell, you can execute
 * `run`
 
 (or type `tasks` to see more possibilities) 
+
+## Documentation
+
+* for syntax of wsClient, see https://www.playframework.com/documentation/2.5.x/ScalaWS
+* for json docs, see https://www.playframework.com/documentation/2.5.x/ScalaJson
+* for scalatest syntax, see http://www.scalatest.org/user_guide/using_matchers 
+* to configure logging, look at [src/main/resources/logback.xml](src/main/resources/logback.xml)
+    * project uses [scala-logging](https://github.com/typesafehub/scala-logging) (configured in [build.sbt](build.sbt))
+
