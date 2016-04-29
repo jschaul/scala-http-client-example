@@ -1,15 +1,15 @@
 package com.example
 
 import akka.stream.{ActorMaterializer, Materializer}
-import com.typesafe.scalalogging.{LazyLogging, Logger}
-import play.api.libs.ws.{WSResponse, WSRequest}
+import com.typesafe.scalalogging.LazyLogging
+import play.api.libs.json.Json
 import play.api.libs.ws.ahc.AhcWSClient
+import play.api.libs.ws.{WSRequest, WSResponse}
 
 import scala.concurrent.Future
 import scala.util.Try
 
 object Hello extends LazyLogging {
-
 
   implicit val actorSystem = akka.actor.ActorSystem()
 
@@ -35,7 +35,7 @@ object Hello extends LazyLogging {
     val responseFuture: Future[WSResponse] = request.get()
 
     responseFuture.map { response =>
-      logger.info(s"response: ${response.body}")
+      logger.info(s"response: ${Json.prettyPrint(response.json)}")
       cleanUp()
     }
 
