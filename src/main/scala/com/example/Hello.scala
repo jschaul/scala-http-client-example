@@ -9,6 +9,9 @@ import play.api.libs.ws.{WSRequest, WSResponse}
 import scala.concurrent.Future
 import scala.util.Try
 
+// for syntax of wsClient, see https://www.playframework.com/documentation/2.5.x/ScalaWS
+// for json docs, see https://www.playframework.com/documentation/2.5.x/ScalaJson
+
 object Hello extends LazyLogging {
 
   implicit val actorSystem = akka.actor.ActorSystem()
