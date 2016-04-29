@@ -9,6 +9,10 @@ val playVersion = "2.5.3"
 
 libraryDependencies ++= Seq(
   "com.typesafe" % "config" % "1.3.0",
+
+  "ch.qos.logback" %  "logback-classic" % "1.1.7",
+  "com.typesafe.scala-logging" %% "scala-logging" % "3.4.0",
+
   "com.typesafe.play" %% "play-json" % playVersion,
   "com.typesafe.play" %% "play-ws" % playVersion,
 
